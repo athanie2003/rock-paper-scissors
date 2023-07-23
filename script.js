@@ -32,7 +32,7 @@ function playRound(playerSelection, computerSelection){
 }
 
 function game(){
-    let playerScore, computerScore = 0;
+    let playerScore = computerScore = 0;
     for(let i = 1; i <= 5; i++){
         let playerChoice, computerChoice;
         while(true){
@@ -46,8 +46,6 @@ function game(){
             console.log('Please type "Rock", "Paper", or "Scissors"');
           }
         }
-        console.log(`Test Player Choice: ${playerChoice}`);
-
         computerChoice = getComputerChoice();
         computerChoice = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
         let round = playRound(playerChoice, computerChoice);
@@ -61,5 +59,15 @@ function game(){
         else{
             i--;
         }
+        console.log(`Player vs. Computer\n Score: ${playerScore}-${computerScore}`);
+    }
+    console.log('Game Over');
+    if(playerScore > computerScore){
+        console.log('You Win!');
+    }
+    else{
+        console.log('You Lose!');
     }
 }
+
+game();
