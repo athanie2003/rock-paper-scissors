@@ -11,8 +11,22 @@ function getComputerChoice(){
 }
 
 //plays single round of Rock Paper Scissors
-function singleRound(playerSelection, computerSelection){
+function playRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
     playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
     computerSelection = computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1);
+
+    if(playerSelection === "Rock" && computerSelection === "Scissors" ||
+       playerSelection === "Paper" && computerSelection === "Rock" ||
+       playerSelection === "Scissors" && computerSelection === "Paper"
+       ){
+        return `You Win! ${playerSelection} beats ${computerSelection}`;
+       }
+    else if(computerSelection === "Rock" && playerSelection === "Scissors" ||
+    computerSelection === "Paper" && playerSelection === "Rock" ||
+    computerSelection === "Scissors" && playerSelection === "Paper"
+    ){
+     return `You Lose! ${computerSelection} beats ${playerSelection}`;
+    }
+    return `It's a Tie!`;
 }
