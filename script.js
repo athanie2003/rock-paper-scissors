@@ -12,9 +12,6 @@ function getComputerChoice(){
 
 //plays single round of Rock Paper Scissors
 function playRound(playerSelection, computerSelection){
-    // playerSelection = playerSelection.toLowerCase();
-    // playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
-    // computerSelection = computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1);
 
     if(playerSelection === "Rock" && computerSelection === "Scissors" ||
        playerSelection === "Paper" && computerSelection === "Rock" ||
