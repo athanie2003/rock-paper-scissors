@@ -65,7 +65,6 @@ function updateScore(choice){
 function checkWinner(){
     if(playerScore === 5 || computerScore === 5){
     changingText.innerText = 'Game Over\n';
-    console.log('Game Over');
     if(playerScore > computerScore){
         changingText.innerText += 'You Win!';
     }
