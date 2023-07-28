@@ -45,17 +45,14 @@ function playRound(playerSelection, computerSelection){
 }
 
 function updateScore(choice){
-    changingText.innerText = playRound(choice, computerChoice);
+    changingText.innerText = `Computer Chooses: ${computerChoice}\n`;
+    changingText.innerText += playRound(choice, computerChoice);
     if(changingText.innerText.includes('Win!')){
         playerScore++;
-        console.log('testing');
     }
     else if(changingText.innerText.includes('Lose!')){
         computerScore++;
-        console.log('testing2');
     }
-    console.log(`p: ${playerScore}`);
-    console.log(`c: ${computerScore}`);
     score.innerText = `Player vs. Computer\n Score: ${playerScore}-${computerScore}`;
     playBtn.innerText = 'Next';
     playBtn.style.display = 'block';
@@ -65,12 +62,19 @@ function updateScore(choice){
 }
 
 function checkWinner(){
+    if(playerScore === 5 || computerScore === 5){
+    changingText.innerText = 'Game Over\n';
     console.log('Game Over');
     if(playerScore > computerScore){
-        console.log('You Win!');
+        changingText.innerText += 'You Win!';
     }
     else{
-        console.log('You Lose!');
+        changingText.innerText += 'You Lose!';
+    }
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+    playBtn.style.display = 'none';
     }
 }
 
@@ -79,20 +83,24 @@ function game(){
     changingText.innerText = `Choose:\nRock, Paper or Scissors?`;
     computerChoice = getComputerChoice();
 }
-    playBtn.addEventListener('click', () => {
+
+// putting buttons in a function causes buttons to perform more than once
+playBtn.addEventListener('click', () => {
         playBtn.style.display = 'none';
         rockBtn.disabled = false;
         paperBtn.disabled = false;
         scissorsBtn.disabled = false;
         changingText.innerText = `Choose:\nRock, Paper or Scissors?`;
-    });
-
-    rockBtn.addEventListener('click', () => {
+});
+rockBtn.addEventListener('click', () => {
         updateScore('Rock');
-    });
-    paperBtn.addEventListener('click', () => {
+        checkWinner();
+});
+paperBtn.addEventListener('click', () => {
         updateScore('Paper');
-    });
-    scissorsBtn.addEventListener('click', () => {
+        checkWinner();
+});
+scissorsBtn.addEventListener('click', () => {
         updateScore('Scissors');
-    });
+        checkWinner();
+});
