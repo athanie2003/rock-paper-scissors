@@ -56,6 +56,7 @@ function updateScore(choice){
     score.innerText = `Player vs. Computer\n Score: ${playerScore}-${computerScore}`;
     playBtn.innerText = 'Next';
     playBtn.style.display = 'block';
+    playBtn.style.cssText = 'margin-top: 50px';
     rockBtn.disabled = true;
     paperBtn.disabled = true;
     scissorsBtn.disabled = true;
@@ -92,6 +93,11 @@ playBtn.addEventListener('click', () => {
         scissorsBtn.disabled = false;
         changingText.innerText = `Choose:\nRock, Paper or Scissors?`;
 });
+
+rockBtn.disabled = true;
+paperBtn.disabled = true;
+scissorsBtn.disabled = true;
+
 rockBtn.addEventListener('click', () => {
         updateScore('Rock');
         checkWinner();
