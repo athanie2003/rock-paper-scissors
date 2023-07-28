@@ -1,3 +1,20 @@
+const playBtn = document.querySelector('.play');
+let playerScore = computerScore = 0;
+const rockBtn = document.querySelector('.rock');
+const paperBtn = document.querySelector('.paper');
+const scissorsBtn = document.querySelector('.scissors');
+const changingText = document.querySelector('h2');
+const score = document.querySelector('h1');
+
+let playerChoice, computerChoice;
+
+function pressPlay(){
+    playBtn.style.display = 'none';
+    game();
+}
+
+playBtn.addEventListener('click', pressPlay);
+
 // return either 'Rock', 'Paper', or 'Scissors'
 function getComputerChoice(){
     switch(Math.floor(Math.random()*3)+1){
@@ -12,7 +29,6 @@ function getComputerChoice(){
 
 //plays single round of Rock Paper Scissors
 function playRound(playerSelection, computerSelection){
-
     if(playerSelection === "Rock" && computerSelection === "Scissors" ||
        playerSelection === "Paper" && computerSelection === "Rock" ||
        playerSelection === "Scissors" && computerSelection === "Paper"
@@ -23,55 +39,60 @@ function playRound(playerSelection, computerSelection){
     computerSelection === "Paper" && playerSelection === "Rock" ||
     computerSelection === "Scissors" && playerSelection === "Paper"
     ){
-     return `You Lose! ${computerSelection} beats ${playerSelection}`;
+      return `You Lose! ${computerSelection} beats ${playerSelection}`;
     }
     return `It's a Tie!`;
 }
 
-function game(){
-    let playerScore = computerScore = 0;
-    const rockBtn = document.querySelector('.rock');
-    const paperBtn = document.querySelector('.paper');
-    const scissorsBtn = document.querySelector('.scissors');
-    const changingText = document.querySelector('h2');
-    
-    // while(playerScore < 5 && computerScore < 5){
-          let playerChoice, computerChoice;
-
-          changingText.innerText = `Choose:\nRock, Paper or Scissors?`;
-          rockBtn.addEventListener('click', () => {playerChoice = 'Rock';});
-          paperBtn.addEventListener('click', () => {playerChoice = 'Paper';});
-          scissorsBtn.addEventListener('click', () => {playerChoice = 'Scissors';});
-
-          if(rockBtn.clicked == true || paperBtn.clicked == true || scissorsBtn.clicked == true){
-
-
-          changingText.innerText = playRound(playerChoice, computerChoice);
-          console.log(changingText.innerText);
-          if(changingText.innerText.includes('Win!')){
-              playerScore++;
-          }
-          else if(changingText.innerText.includes('Lose!')){
-              computerScore++;
-          }
-
-        console.log(`Player vs. Computer\n Score: ${playerScore}-${computerScore}`);
+function updateScore(choice){
+    changingText.innerText = playRound(choice, computerChoice);
+    if(changingText.innerText.includes('Win!')){
+        playerScore++;
+        console.log('testing');
     }
-    // }
-    // console.log('Game Over');
-    // if(playerScore > computerScore){
-    //     console.log('You Win!');
-    // }
-    // else{
-    //     console.log('You Lose!');
-    // }
+    else if(changingText.innerText.includes('Lose!')){
+        computerScore++;
+        console.log('testing2');
+    }
+    console.log(`p: ${playerScore}`);
+    console.log(`c: ${computerScore}`);
+    score.innerText = `Player vs. Computer\n Score: ${playerScore}-${computerScore}`;
+    playBtn.innerText = 'Next';
+    playBtn.style.display = 'block';
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
 }
 
-const playBtn = document.querySelector('.play');
-
-function pressPlay(){
-    playBtn.style.display = 'none';
-    game();
+function checkWinner(){
+    console.log('Game Over');
+    if(playerScore > computerScore){
+        console.log('You Win!');
+    }
+    else{
+        console.log('You Lose!');
+    }
 }
 
-playBtn.addEventListener('click', pressPlay);
+function game(){
+    score.innerText = `Player vs. Computer\n Score: ${playerScore}-${computerScore}`;
+    changingText.innerText = `Choose:\nRock, Paper or Scissors?`;
+    computerChoice = getComputerChoice();
+}
+    playBtn.addEventListener('click', () => {
+        playBtn.style.display = 'none';
+        rockBtn.disabled = false;
+        paperBtn.disabled = false;
+        scissorsBtn.disabled = false;
+        changingText.innerText = `Choose:\nRock, Paper or Scissors?`;
+    });
+
+    rockBtn.addEventListener('click', () => {
+        updateScore('Rock');
+    });
+    paperBtn.addEventListener('click', () => {
+        updateScore('Paper');
+    });
+    scissorsBtn.addEventListener('click', () => {
+        updateScore('Scissors');
+    });
