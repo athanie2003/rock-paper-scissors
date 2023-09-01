@@ -1,6 +1,14 @@
-# rock-paper-scissors
-Create a simple rock paper scissors game
+# Rock, Paper, Scissors
+Play rock, paper, scissors against the computer. First to 5 wins.
 
-Use functions, loops and conditional statements
+## Description
+Create a simple rock paper scissors game. Take user's input from buttons. Record the score.
 
-Use event listeners and buttons to take user inputs
+## How To Use
+Click the 'Play' button to start the game. Choose any of the three buttons: rock, paper, or scissors.
+Click the 'Next' button to move on to the next round.
+
+## Future Changes
+- use images instead of emojis as symbols
+- allow players to play the game again without refreshing
+- use some animations to make the computer choose like a player
